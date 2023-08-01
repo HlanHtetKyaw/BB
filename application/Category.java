@@ -13,9 +13,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -35,6 +35,8 @@ public class Category {
 	Button iq_in_button;
 	Button ach_button;
 	Button ach_in_button;
+	Button profile;
+	Button name;
 
 	Text Myanmar;
 	Text English;
@@ -63,6 +65,8 @@ public class Category {
 	Image Moon = new Image("moon.png");
 	Image Cone = new Image("cone.png");
 	Image Pyramid = new Image("pyramid.png");
+	Image Rookie = new Image("rookie.png");
+	Image Cele = new Image("celeRope.png");
 
 	ImageView langText = new ImageView(Lang);
 	ImageView backArrow = new ImageView(Arrow);
@@ -83,6 +87,8 @@ public class Category {
 	ImageView moonImg = new ImageView(Moon);
 	ImageView coneImg = new ImageView(Cone);
 	ImageView pyramidImg = new ImageView(Pyramid);
+	ImageView rookieImg = new ImageView(Rookie);
+	ImageView celeImg = new ImageView(Cele);
 
 	StackPane root;
 
@@ -120,13 +126,30 @@ public class Category {
 	}
 
 	private void profile() {
-		Circle pCircle = new Circle();
-		pCircle.setRadius(65);
-		pCircle.setFill(Color.WHITE);
-		StackPane.setAlignment(pCircle, Pos.TOP_CENTER);
-		StackPane.setMargin(pCircle, new Insets(25, 0, 0, 0));
+		profile = new Button();
+		profile.getStyleClass().add("circular-button");
+		profile.setPrefSize(125, 125);
+		StackPane.setAlignment(profile, Pos.TOP_RIGHT);
+		StackPane.setMargin(profile, new Insets(25, 450, 0, 0));
 
-		root.getChildren().addAll(pCircle);
+		name = new Button();
+		name.getStyleClass().add("name");
+		name.setPrefSize(375, 75);
+		StackPane.setAlignment(name, Pos.TOP_RIGHT);
+		StackPane.setMargin(name, new Insets(55, 150, 0, 0));
+
+		Text test = new Text("Rookie");
+		Font Mathematics_font = Font.loadFont(getClass().getResourceAsStream("/PoppinB.ttf"), 26);
+		test.setFont(Mathematics_font);
+		test.setFill(Color.WHITE);
+		name.setGraphic(test);
+
+		rookieImg = new ImageView(Rookie);
+		rookieImg.setFitWidth(55);
+		rookieImg.setFitHeight(77);
+		profile.setGraphic(rookieImg);
+
+		root.getChildren().addAll(name, profile);
 	}
 
 	private void elements() {
@@ -136,7 +159,6 @@ public class Category {
 		back.setOnAction(a -> back());
 		backArrow.setFitWidth(40);
 		backArrow.setFitHeight(30);
-
 		back.setGraphic(backArrow);
 		StackPane.setAlignment(back, Pos.TOP_LEFT);
 		StackPane.setMargin(back, new Insets(30, 0, 0, 30));// top right bottom left
@@ -226,11 +248,20 @@ public class Category {
 		rotatePyramid.setAutoReverse(false);
 		rotatePyramid.setNode(pyramidImg);
 
+		celeImg = new ImageView(Cele);
+		celeImg.setFitWidth(338);
+		celeImg.setFitHeight(142);
+		StackPane.setAlignment(celeImg, Pos.TOP_CENTER);
+		StackPane.setMargin(celeImg, new Insets(0, 180, 0, 0));
+		Rotate rt = new Rotate(-5);
+		celeImg.getTransforms().add(rt);
+
 		ParallelTransition parallelTransition = new ParallelTransition();
 		parallelTransition.getChildren().addAll(rotateMoon, stc, rotateCone, rotatePyramid, tt, tt0, tt1);
 		parallelTransition.play();
 
-		root.getChildren().addAll(lan_button, back, flat, boyStand, girlStand, gBoard, moonImg, coneImg, pyramidImg);
+		root.getChildren().addAll(celeImg, lan_button, back, flat, boyStand, girlStand, gBoard, moonImg, coneImg,
+				pyramidImg);
 	}
 
 	void lan_click() {

@@ -1,5 +1,9 @@
 package application;
 
+import javafx.animation.ParallelTransition;
+import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -9,9 +13,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Category {
 	Scene scene1;
@@ -45,6 +51,18 @@ public class Category {
 	Image Flat = new Image("flat.png");
 	Image G_board = new Image("greenBoard.png");
 	Image CatText = new Image("catText.png");
+	Image CatTextM = new Image("catTextM.png");
+	Image M_Math = new Image("m_math.png");
+	Image M_Logic = new Image("m_logic.png");
+	Image M_IQ = new Image("m_iq.png");
+	Image M_Ach = new Image("m_ach.png");
+	Image M_MathB = new Image("m_mathB.png");
+	Image M_LogicB = new Image("m_logicB.png");
+	Image M_IQB = new Image("m_iqB.png");
+	Image M_AchB = new Image("m_achB.png");
+	Image Moon = new Image("moon.png");
+	Image Cone = new Image("cone.png");
+	Image Pyramid = new Image("pyramid.png");
 
 	ImageView langText = new ImageView(Lang);
 	ImageView backArrow = new ImageView(Arrow);
@@ -53,6 +71,18 @@ public class Category {
 	ImageView flat = new ImageView(Flat);
 	ImageView gBoard = new ImageView(G_board);
 	ImageView catText = new ImageView(CatText);
+	ImageView catTextM = new ImageView(CatTextM);
+	ImageView m_Math = new ImageView(M_Math);
+	ImageView m_Logic = new ImageView(M_Logic);
+	ImageView m_IQ = new ImageView(M_IQ);
+	ImageView m_Ach = new ImageView(M_Ach);
+	ImageView m_MathB = new ImageView(M_MathB);
+	ImageView m_LogicB = new ImageView(M_LogicB);
+	ImageView m_IQB = new ImageView(M_IQB);
+	ImageView m_AchB = new ImageView(M_AchB);
+	ImageView moonImg = new ImageView(Moon);
+	ImageView coneImg = new ImageView(Cone);
+	ImageView pyramidImg = new ImageView(Pyramid);
 
 	StackPane root;
 
@@ -64,7 +94,7 @@ public class Category {
 
 		root = new StackPane();
 		root.setStyle("-fx-background-color: #F79630");
-
+		profile();
 		elements();
 		mathematics();
 		logic();
@@ -73,8 +103,9 @@ public class Category {
 		lan_change();
 		// Retrieve the stage from the event source
 		currentStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-
-		scene1 = new Scene(root, currentStage.getWidth(), currentStage.getHeight());
+		scene1 = new Scene(root);
+		currentStage.setWidth(currentStage.getWidth());
+		currentStage.setHeight(currentStage.getHeight());
 		scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		currentStage.setScene(scene1);
 		currentStage.show();
@@ -82,10 +113,20 @@ public class Category {
 
 	private void back() {
 		s = currentStage;
-		currentStage.setScene(Main.scene);
 		currentStage.setHeight(s.getHeight());
 		currentStage.setWidth(s.getWidth());
+		currentStage.setScene(Main.scene);
 		currentStage.show();
+	}
+
+	private void profile() {
+		Circle pCircle = new Circle();
+		pCircle.setRadius(65);
+		pCircle.setFill(Color.WHITE);
+		StackPane.setAlignment(pCircle, Pos.TOP_CENTER);
+		StackPane.setMargin(pCircle, new Insets(25, 0, 0, 0));
+
+		root.getChildren().addAll(pCircle);
 	}
 
 	private void elements() {
@@ -111,23 +152,85 @@ public class Category {
 		flat.setFitHeight(30);
 		StackPane.setAlignment(flat, Pos.BOTTOM_LEFT);
 		StackPane.setMargin(flat, new Insets(0, 0, 125, 25));
+		TranslateTransition tt0 = new TranslateTransition();
+		tt0.setByY(-50);
+		tt0.setCycleCount(TranslateTransition.INDEFINITE);
+		tt0.setAutoReverse(true);
+		tt0.setNode(flat);
+		tt0.setDuration(Duration.seconds(10));
 
 		boyStand.setFitWidth(102);
 		boyStand.setFitHeight(211);
 		StackPane.setAlignment(boyStand, Pos.BOTTOM_LEFT);
 		StackPane.setMargin(boyStand, new Insets(0, 0, 140, 35));
+		TranslateTransition tt = new TranslateTransition();
+		tt.setByY(-50);
+		tt.setCycleCount(TranslateTransition.INDEFINITE);
+		tt.setAutoReverse(true);
+		tt.setNode(boyStand);
+		tt.setDuration(Duration.seconds(10));
 
 		girlStand.setFitWidth(111);
 		girlStand.setFitHeight(211);
 		StackPane.setAlignment(girlStand, Pos.CENTER_RIGHT);
 		StackPane.setMargin(girlStand, new Insets(0, 25, 0, 0));
+		TranslateTransition tt1 = new TranslateTransition();
+		tt1.setByY(50);
+		tt1.setCycleCount(TranslateTransition.INDEFINITE);
+		tt1.setAutoReverse(true);
+		tt1.setNode(girlStand);
+		tt1.setDuration(Duration.seconds(10));
 
 		gBoard.setFitWidth(490);
 		gBoard.setFitHeight(370);
 		StackPane.setAlignment(gBoard, Pos.CENTER);
 		StackPane.setMargin(gBoard, new Insets(0, 450, 0, 0));
 
-		root.getChildren().addAll(lan_button, back, flat, boyStand, girlStand, gBoard);
+		moonImg.setFitWidth(128);
+		moonImg.setFitHeight(116);
+		StackPane.setAlignment(moonImg, Pos.BOTTOM_CENTER);
+		StackPane.setMargin(moonImg, new Insets(0, 450, 50, 0));
+		RotateTransition rotateMoon = new RotateTransition();
+		rotateMoon.setByAngle(-360);
+		rotateMoon.setDuration(Duration.seconds(20));
+		rotateMoon.setCycleCount(RotateTransition.INDEFINITE);
+		rotateMoon.setAutoReverse(false);
+		rotateMoon.setNode(moonImg);
+
+		coneImg.setFitWidth(77);
+		coneImg.setFitHeight(81);
+		StackPane.setAlignment(coneImg, Pos.TOP_RIGHT);
+		StackPane.setMargin(coneImg, new Insets(50, 50, 0, 0));
+		RotateTransition rotateCone = new RotateTransition();
+		rotateCone.setByAngle(360);
+		rotateCone.setDuration(Duration.seconds(20));
+		rotateCone.setCycleCount(RotateTransition.INDEFINITE);
+		rotateCone.setAutoReverse(false);
+		rotateCone.setNode(coneImg);
+		ScaleTransition stc = new ScaleTransition();
+		stc.setToX(1.5);
+		stc.setToY(1.5);
+		stc.setAutoReverse(true);
+		stc.setCycleCount(ScaleTransition.INDEFINITE);
+		stc.setDuration(Duration.seconds(5));
+		stc.setNode(coneImg);
+
+		pyramidImg.setFitWidth(92);
+		pyramidImg.setFitHeight(65);
+		StackPane.setAlignment(pyramidImg, Pos.BOTTOM_RIGHT);
+		StackPane.setMargin(pyramidImg, new Insets(0, 25, 25, 0));
+		RotateTransition rotatePyramid = new RotateTransition();
+		rotatePyramid.setByAngle(360);
+		rotatePyramid.setDuration(Duration.seconds(20));
+		rotatePyramid.setCycleCount(RotateTransition.INDEFINITE);
+		rotatePyramid.setAutoReverse(false);
+		rotatePyramid.setNode(pyramidImg);
+
+		ParallelTransition parallelTransition = new ParallelTransition();
+		parallelTransition.getChildren().addAll(rotateMoon, stc, rotateCone, rotatePyramid, tt, tt0, tt1);
+		parallelTransition.play();
+
+		root.getChildren().addAll(lan_button, back, flat, boyStand, girlStand, gBoard, moonImg, coneImg, pyramidImg);
 	}
 
 	void lan_click() {
@@ -146,11 +249,22 @@ public class Category {
 		math_button.setGraphic(math_in_button);
 		math_button.setOnMouseEntered(e -> {
 			math_in_button.setStyle("-fx-background-color: WHITE;");
-			Math.setFill(Color.BLACK);
+			if (languageChange) {
+				Math.setFill(Color.BLACK);
+			} else {
+				m_MathB = new ImageView(M_MathB);
+				m_MathB.setFitWidth(145);
+				m_MathB.setFitHeight(40);
+				math_in_button.setGraphic(m_MathB);
+			}
 		});
 		math_button.setOnMouseExited(e -> {
 			math_in_button.setStyle("-fx-background-color: BLACK;");
-			Math.setFill(Color.WHITE);
+			if (languageChange) {
+				Math.setFill(Color.WHITE);
+			} else {
+				math_in_button.setGraphic(m_Math);
+			}
 		});
 		StackPane.setAlignment(math_button, Pos.CENTER_RIGHT);
 		StackPane.setMargin(math_button, new Insets(0, 150, 300, 0));
@@ -169,11 +283,22 @@ public class Category {
 		lg_button.setGraphic(lg_in_button);
 		lg_button.setOnMouseEntered(e -> {
 			lg_in_button.setStyle("-fx-background-color: WHITE;");
-			Logic.setFill(Color.BLACK);
+			if (languageChange) {
+				Logic.setFill(Color.BLACK);
+			} else {
+				m_LogicB = new ImageView(M_LogicB);
+				m_LogicB.setFitWidth(115);
+				m_LogicB.setFitHeight(45);
+				lg_in_button.setGraphic(m_LogicB);
+			}
 		});
 		lg_button.setOnMouseExited(e -> {
 			lg_in_button.setStyle("-fx-background-color: BLACK;");
-			Logic.setFill(Color.WHITE);
+			if (languageChange) {
+				Logic.setFill(Color.WHITE);
+			} else {
+				lg_in_button.setGraphic(m_Logic);
+			}
 		});
 		StackPane.setAlignment(lg_button, Pos.CENTER_RIGHT);
 		StackPane.setMargin(lg_button, new Insets(0, 150, 25, 0));
@@ -192,11 +317,22 @@ public class Category {
 		iq_button.setGraphic(iq_in_button);
 		iq_button.setOnMouseEntered(e -> {
 			iq_in_button.setStyle("-fx-background-color: WHITE;");
-			IQ.setFill(Color.BLACK);
+			if (languageChange) {
+				IQ.setFill(Color.BLACK);
+			} else {
+				m_IQB = new ImageView(M_IQB);
+				m_IQB.setFitWidth(210);
+				m_IQB.setFitHeight(60);
+				iq_in_button.setGraphic(m_IQB);
+			}
 		});
 		iq_button.setOnMouseExited(e -> {
 			iq_in_button.setStyle("-fx-background-color: BLACK;");
-			IQ.setFill(Color.WHITE);
+			if (languageChange) {
+				IQ.setFill(Color.WHITE);
+			} else {
+				iq_in_button.setGraphic(m_IQ);
+			}
 		});
 		StackPane.setAlignment(iq_button, Pos.CENTER_RIGHT);
 		StackPane.setMargin(iq_button, new Insets(0, 150, -250, 0));
@@ -215,11 +351,22 @@ public class Category {
 		ach_button.setGraphic(ach_in_button);
 		ach_button.setOnMouseEntered(e -> {
 			ach_in_button.setStyle("-fx-background-color: WHITE;");
-			Ach.setFill(Color.BLACK);
+			if (languageChange) {
+				Ach.setFill(Color.BLACK);
+			} else {
+				m_AchB = new ImageView(M_AchB);
+				m_AchB.setFitWidth(120);
+				m_AchB.setFitHeight(55);
+				ach_in_button.setGraphic(m_AchB);
+			}
 		});
 		ach_button.setOnMouseExited(e -> {
 			ach_in_button.setStyle("-fx-background-color: BLACK;");
-			Ach.setFill(Color.WHITE);
+			if (languageChange) {
+				Ach.setFill(Color.WHITE);
+			} else {
+				ach_in_button.setGraphic(m_Ach);
+			}
 		});
 		StackPane.setAlignment(ach_button, Pos.CENTER_RIGHT);
 		StackPane.setMargin(ach_button, new Insets(0, 150, -525, 0));
@@ -230,6 +377,11 @@ public class Category {
 	private void lan_change() {
 		if (languageChange) {
 			langText.setVisible(false);
+			catTextM.setVisible(false);
+			m_Math.setVisible(false);
+			m_Logic.setVisible(false);
+			m_IQ.setVisible(false);
+			m_Ach.setVisible(false);
 
 			Lan = new Text("Language");
 			Font lan_font = Font.loadFont(getClass().getResourceAsStream("/PoppinB.ttf"), 20);
@@ -294,7 +446,33 @@ public class Category {
 			Myanmar.setFill(Color.WHITE);
 			lan_button.setGraphic(Myanmar);
 
-			root.getChildren().addAll(langText);
+			catTextM = new ImageView(CatTextM);
+			catTextM.setFitWidth(335);
+			catTextM.setFitHeight(290);
+			StackPane.setAlignment(catTextM, Pos.CENTER);
+			StackPane.setMargin(catTextM, new Insets(0, 450, 0, 0));
+
+			m_Math = new ImageView(M_Math);
+			m_Math.setFitWidth(145);
+			m_Math.setFitHeight(40);
+			math_in_button.setGraphic(m_Math);
+
+			m_Logic = new ImageView(M_Logic);
+			m_Logic.setFitWidth(115);
+			m_Logic.setFitHeight(45);
+			lg_in_button.setGraphic(m_Logic);
+
+			m_IQ = new ImageView(M_IQ);
+			m_IQ.setFitWidth(210);
+			m_IQ.setFitHeight(60);
+			iq_in_button.setGraphic(m_IQ);
+
+			m_Ach = new ImageView(M_Ach);
+			m_Ach.setFitWidth(120);
+			m_Ach.setFitHeight(55);
+			ach_in_button.setGraphic(m_Ach);
+
+			root.getChildren().addAll(langText, catTextM);
 		}
 	}
 }
